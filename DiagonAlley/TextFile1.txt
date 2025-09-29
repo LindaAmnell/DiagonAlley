@@ -1,0 +1,83 @@
+﻿// =================== G-KRAV ===================
+
+// [x] Skapa klassen Product
+//     - Properties: Namn, Pris, Quantity (antal)
+//     - Metod för att räkna ut totalpris (pris * antal)
+
+// [x] Skapa klassen Customer
+//     - Properties: Name (read-only), Password (private), Cart (lista av produkter)
+//     - Metod för att verifiera lösenord
+//     - Metod för att beräkna totalpris för kundvagnen
+//     - Override ToString(): skriv ut namn, lösenord och kundvagnens innehåll på snyggt sätt
+
+// [x] I Main: Skapa meny för start
+//     - Alternativ: Registrera ny kund, Logga in, Avsluta
+
+// [x] Funktion: Registrera ny kund
+//     - Ange namn + lösenord
+//     - Spara i lista med kunder
+//     - Namnet ska inte gå att ändra
+
+// [x] Funktion: Logga in
+//     - Ange namn + lösenord
+//     - Kontrollera om kunden finns
+//     - Om ej finns: fråga om man vill registrera
+//     - Om lösenord fel: skriv fel och låt försöka igen
+
+// [ ] Efter inloggning: visa kundmeny
+//     - Alternativ: Handla, Se kundvagn, Gå till kassan, Logga ut
+
+// [ ] Funktion: Handla
+//     - Visa minst 3 produkter med pris
+//     - Fråga användaren hur många av varje produkt som ska köpas
+//     - Kunna lägga till produkter i kundvagn
+
+// [ ] Funktion: Se kundvagn
+//     - Lista alla produkter i vagnen
+//     - Visa styckpris, antal, totalpris per produkt
+//     - Visa totalkostnad för hela vagnen
+
+// [ ] Funktion: Gå till kassan
+//     - Visa summering av kundvagnen
+//     - Räkna ut totalpris
+//     - Rabatt (endast om VG-krav implementeras)
+//     - Rensa kundvagnen efter avslutad betalning (frivilligt, EJ krav)
+
+// [ ] Logga ut
+//     - Gå tillbaka till startmenyn
+//     - Kundens kundvagn sparas i objektet tills man stänger programmet
+
+// [ ] Pre-definiera 3 kunder i programmet
+//     - Kund1: Knatte / 123
+//     - Kund2: Fnatte / 321
+//     - Kund3: Tjatte / 213
+
+// [ ] Säkerställ att programmet inte kraschar vid felinmatningar
+
+
+// =================== VG-KRAV ===================
+
+// [ ] Strukturera koden snyggt
+//     - Dela upp i metoder
+//     - Undvik duplicerad eller onödig kod
+//     - Lätt att bygga ut (ex. fler produkter/kunder)
+
+// [ ] Implementera kundnivåer (arv från Customer)
+//     - Bronze: 5% rabatt
+//     - Silver: 10% rabatt
+//     - Gold: 15% rabatt
+//     - Rabatt ska dras på hela köpet i kassan
+
+// [ ] Spara registrerade kunder mellan körningar
+//     - Använd t.ex. en textfil
+//     - Vid start: läs in kunder från fil
+//     - Vid registrering: spara ner ny kund till fil
+//     - (kundvagnar behöver EJ sparas mellan körningar)
+
+// [ ] Implementera val av valuta
+//     - Minst 3 valutor (t.ex. SEK, USD, EUR)
+//     - Växelkurs kan vara hårdkodad
+//     - Kundmenyn ska ha alternativ för att byta valuta
+//     - Visa priser i vald valuta
+
+// [ ] Säkerställ att alla krav är klara före deadline
