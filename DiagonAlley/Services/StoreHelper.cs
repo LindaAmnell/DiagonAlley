@@ -81,6 +81,8 @@ namespace DiagonAlley.Services
                 {
                     case "1":
                         //Wand
+                        //var wand = DataService.GetProductByType<Wand>();
+
                         break;
                     case "2":
                         //Potion
