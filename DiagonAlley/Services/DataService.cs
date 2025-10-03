@@ -20,26 +20,27 @@ namespace DiagonAlley.Services
             new Broomstick("Cleansweep Seven", 700, 0, 120, "Cleansweep Co.")
             };
 
+        private static List<Wizard> wizards = new List<Wizard>
+        {
+            new Wizard("Harry Potter", "123" , "Wizard"),
+            new Wizard("Hermione Granger", "321"," Witch"),
+            new Wizard("Ron Weasley", "213", "Wizard")
+        };
+
 
         public static List<T> GetProductByType<T>() where T : Product
         {
             return productList.OfType<T>().ToList();
         }
 
+        public static List<Wizard> GetAllWizards()
+        {
+            return wizards;
+        }
 
-        //public static Void ShowAllProducts(List<Product> products, string type)
-        //{
-
-        //    Console.WriteLine($"What {type} do you want to by");
-
-        //    for (int i = 0; i < products.Count; i++)
-        //    {
-
-        //    }
-
-        //}
-
-
-
+        public static void AddWizard(Wizard wizard)
+        {
+            wizards.Add(wizard);
+        }
     }
 }

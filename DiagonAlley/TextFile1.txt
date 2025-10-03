@@ -24,35 +24,44 @@
 //     - Om ej finns: fråga om man vill registrera
 //     - Om lösenord fel: skriv fel och låt försöka igen
 
-// [ ] Efter inloggning: visa kundmeny
+// [x] Efter inloggning: visa kundmeny
 //     - Alternativ: Handla, Se kundvagn, Gå till kassan, Logga ut
 
-// [ ] Funktion: Handla
+// [x] Funktion: Handla
 //     - Visa minst 3 produkter med pris
 //     - Fråga användaren hur många av varje produkt som ska köpas
 //     - Kunna lägga till produkter i kundvagn
 
-// [ ] Funktion: Se kundvagn
+// [x] Funktion: Se kundvagn
 //     - Lista alla produkter i vagnen
 //     - Visa styckpris, antal, totalpris per produkt
 //     - Visa totalkostnad för hela vagnen
 
-// [ ] Funktion: Gå till kassan
-//     - Visa summering av kundvagnen
-//     - Räkna ut totalpris
-//     - Rabatt (endast om VG-krav implementeras)
-//     - Rensa kundvagnen efter avslutad betalning (frivilligt, EJ krav)
+// [X] Funktion: Gå till kassan
+// [X] - Visa summering av kundvagnen
+// [X] - Räkna ut totalpris
+// [ ] - Rabatt (endast om VG-krav implementeras)
+// [X] - Rensa kundvagnen efter avslutad betalning (frivilligt, EJ krav)
 
 // [ ] Logga ut
 //     - Gå tillbaka till startmenyn
 //     - Kundens kundvagn sparas i objektet tills man stänger programmet
 
-// [ ] Pre-definiera 3 kunder i programmet
+// [X] Pre-definiera 3 kunder i programmet
 //     - Kund1: Knatte / 123
 //     - Kund2: Fnatte / 321
 //     - Kund3: Tjatte / 213
 
 // [ ] Säkerställ att programmet inte kraschar vid felinmatningar
+
+
+///  =================== TODO ===================
+
+//  - Man måste kunna exita password ifall man skrivit fel
+//  - Krash om man skriver in bokstav på antal i produkt
+//  - Refactorera menyerna
+//  - Lägga in några clear
+//  - space mellan vissa rader
 
 
 // =================== VG-KRAV ===================
@@ -81,3 +90,9 @@
 //     - Visa priser i vald valuta
 
 // [ ] Säkerställ att alla krav är klara före deadline
+
+
+
+
+
+/// setC

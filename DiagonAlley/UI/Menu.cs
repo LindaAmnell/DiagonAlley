@@ -1,11 +1,12 @@
-﻿namespace DiagonAlley.Menus
+﻿using DiagonAlley.Models;
+using DiagonAlley.Services;
+
+namespace DiagonAlley.UI
 {
     public static class Menu
     {
-
         public static string ShowMainMenu()
         {
-
             Console.Clear();
             Console.WriteLine("╔═══════════════════════════════╗");
             Console.WriteLine("║ [1] Create new customer       ║");
@@ -13,10 +14,8 @@
             Console.WriteLine("║ [3] Exit                      ║");
             Console.WriteLine("╚═══════════════════════════════╝\n");
 
-            Console.Write("Choose: ");
-            return Console.ReadLine() ?? "";
+            return InputHelper.AskForChoice();
         }
-
         public static string ShowCustomerMenu(string customerName)
         {
             Console.Clear();
@@ -27,10 +26,9 @@
             Console.WriteLine("║ [3] Checkout                  ║");
             Console.WriteLine("║ [4] Log out                   ║");
             Console.WriteLine("╚═══════════════════════════════╝");
-            Console.Write("Choose: ");
-            return Console.ReadLine() ?? "";
-        }
 
+            return InputHelper.AskForChoice();
+        }
 
         public static string ShowAllProductsMenu()
         {
@@ -42,11 +40,24 @@
             Console.WriteLine("║ [3] BromStick                 ║");
             Console.WriteLine("║ [4] Exit shop                 ║");
             Console.WriteLine("╚═══════════════════════════════╝");
-            Console.Write("Choose: ");
-            return Console.ReadLine() ?? "";
 
+            return InputHelper.AskForChoice();
 
+        }
 
+        public static string ShowCheckoutMenu(Wizard wizard)
+        {
+            Console.Clear();
+            CartService.ShowCart(wizard);
+            Console.WriteLine("\n----- Checkout -----");
+            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("╔════════════════════════════════════╗");
+            Console.WriteLine("║ [1] Confirm purchase and pay       ║");
+            Console.WriteLine("║ [2] Clear cart (remove all items)  ║");
+            Console.WriteLine("║ [3] Cancel and go back             ║");
+            Console.WriteLine("╚════════════════════════════════════╝");
+
+            return InputHelper.AskForChoice();
         }
 
     }

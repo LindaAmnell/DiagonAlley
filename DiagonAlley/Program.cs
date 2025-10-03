@@ -1,4 +1,4 @@
-﻿using DiagonAlley.Services;
+﻿using DiagonAlley.UI;
 
 namespace DiagonAlley
 {
@@ -6,7 +6,7 @@ namespace DiagonAlley
     {
         static void Main(string[] args)
         {
-            var store = new StoreHelper();
+            var store = new StoreController();
             store.RunStore();
         }
     }

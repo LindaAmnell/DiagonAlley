@@ -6,21 +6,17 @@
         private string Password { get; set; }
         public string Role { get; private set; }
 
-        private List<Product> cart;
+        private readonly List<CartItem> cart = new List<CartItem>();
 
-        public List<Product> Cart
-        {
-            get { return cart; }
-        }
+        public IReadOnlyList<CartItem> Cart => cart;
 
         public Wizard(string name, string password, string role)
         {
             Name = name;
             Password = password;
-            cart = new List<Product>();
+            cart = new List<CartItem>();
             Role = role;
         }
-
         public bool VerifyPassword(string password)
         {
             return Password == password;
@@ -29,6 +25,20 @@
         public double CartTotal()
         {
             return cart.Sum(p => p.TotalPrice());
+        }
+
+        public void AddToCart(Product p, int amount)
+        {
+            if (p == null || amount <= 0)
+            {
+                return;
+            }
+            cart.Add(new CartItem(p, amount));
+
+        }
+        public void ClearCart()
+        {
+            cart.Clear();
         }
 
         public override string ToString()
@@ -40,10 +50,10 @@
             string cartContent = "";
             double total = 0;
 
-            foreach (Product p in cart)
+            foreach (CartItem c in cart)
             {
-                double productTotal = p.TotalPrice();
-                cartContent += $"{p.Amount}kr x {p.Name} = {productTotal}kr\n";
+                double productTotal = c.TotalPrice();
+                cartContent += $"{c.Amount}kr x {c.Product.Name} = {productTotal}kr\n";
                 total += productTotal;
             }
 

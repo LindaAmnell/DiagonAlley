@@ -1,9 +1,9 @@
-﻿using DiagonAlley.Menus;
-using DiagonAlley.Models;
+﻿using DiagonAlley.Models;
+using DiagonAlley.Services;
 
-namespace DiagonAlley.Services
+namespace DiagonAlley.UI
 {
-    public class StoreHelper
+    public class StoreController
     {
         private readonly WizardService wizardService = new WizardService();
         public void RunStore()
@@ -13,7 +13,6 @@ namespace DiagonAlley.Services
             while (running)
             {
                 string choice = Menu.ShowMainMenu();
-
                 switch (choice)
                 {
                     case "1":
@@ -34,28 +33,27 @@ namespace DiagonAlley.Services
                         Console.WriteLine("Invalid choice, try again.");
                         break;
                 }
+                InputHelper.Pause();
+
             }
         }
 
         private void HandleCustomerMenu(Wizard wizard)
         {
-
             bool loggedIn = true;
-
-            string customerChoice = Menu.ShowCustomerMenu(wizard.Name);
-
             while (loggedIn)
             {
+                string customerChoice = Menu.ShowCustomerMenu(wizard.Name);
                 switch (customerChoice)
                 {
                     case "1":
-                        // Shop products
+                        ProductsMenu(wizard);
                         break;
                     case "2":
-                        // View cart
+                        CartService.ShowCart(wizard);
                         break;
                     case "3":
-                        // Checkout
+                        CheckoutMenu(wizard);
                         break;
                     case "4":
                         loggedIn = false;
@@ -64,31 +62,27 @@ namespace DiagonAlley.Services
                         Console.WriteLine("Invalid choice, try again.");
                         break;
                 }
-
             }
-
         }
 
-        private void ProductsMenu()
+        private void ProductsMenu(Wizard wizard)
         {
             bool isShopping = true;
 
-            string choice = Menu.ShowAllProductsMenu();
             while (isShopping)
             {
-
+                string choice = Menu.ShowAllProductsMenu();
+                (Product chosen, int amount) = (null, 0);
                 switch (choice)
                 {
                     case "1":
-                        //Wand
-                        //var wand = DataService.GetProductByType<Wand>();
-
+                        (chosen, amount) = ProductPrinter.ShowAllProducts<Wand>("Wand");
                         break;
                     case "2":
-                        //Potion
+                        (chosen, amount) = ProductPrinter.ShowAllProducts<Potion>("Potion");
                         break;
                     case "3":
-                        //bromstick
+                        (chosen, amount) = ProductPrinter.ShowAllProducts<Broomstick>("Bromstick");
                         break;
                     case "4":
                         isShopping = false;
@@ -97,7 +91,38 @@ namespace DiagonAlley.Services
                         Console.WriteLine("Invalid choice, try again.");
                         break;
                 }
+                if (chosen != null && amount > 0)
+                {
+                    wizard.AddToCart(chosen, amount);
+                    Console.WriteLine($"{amount} x {chosen.Name} has been added to your cart!");
+                    InputHelper.Pause();
+                }
+                Console.WriteLine("hej");
             }
+        }
+
+        private void CheckoutMenu(Wizard wizard)
+        {
+            var checkoutChoice = Menu.ShowCheckoutMenu(wizard);
+
+            switch (checkoutChoice)
+            {
+                case "1":
+                    CartService.ConfirmPurchase(wizard);
+                    break;
+                case "2":
+                    CartService.ClearWizardCart(wizard);
+                    break;
+                case "3":
+                    Console.WriteLine("Returning to menu...");
+
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    break;
+            }
+            InputHelper.Pause();
+
         }
     }
 }

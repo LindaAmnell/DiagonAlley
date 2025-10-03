@@ -15,15 +15,13 @@
             Price = price;
             Amount = amount;
         }
-        public void AddQuantity(int n)
-        {
-            Amount += n;
-        }
 
         public double TotalPrice()
         {
             return Price * Amount;
         }
+
+
 
     }
 }
