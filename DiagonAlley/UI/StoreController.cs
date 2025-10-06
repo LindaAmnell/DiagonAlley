@@ -57,6 +57,9 @@ namespace DiagonAlley.UI
                         CheckoutMenu(w);
                         break;
                     case "4":
+                        CurrencyMenuService.ChangeCurrencyMenu();
+                        break;
+                    case "5":
                         Console.WriteLine($"{w.Name} has exited Diagon Alley.");
                         Console.ReadKey();
                         loggedIn = false;

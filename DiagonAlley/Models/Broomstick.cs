@@ -10,11 +10,10 @@
             Model = model;
 
         }
-
-
         public override string ToString()
         {
-            return $"{Name} Speed: {Speed}, Model: {Model} - {Price}";
+            return $"{Name} | Speed: {Speed} km/h | Brand: {Model} | {GetFormattedPrice()}";
         }
+
     }
 }

@@ -14,7 +14,8 @@
 
         public override string ToString()
         {
-            return $"{Name} | Effect: {Effect} | Duration: {Duration} min | {Price} kr ";
+            return $"{Name} | Effect: {Effect} | Duration: {Duration} min | {GetFormattedPrice()}";
         }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace DiagonAlley.Models
+﻿using DiagonAlley.Services;
+
+namespace DiagonAlley.Models
 {
     public abstract class Product
     {
@@ -20,6 +22,13 @@
         {
             return Price * Amount;
         }
+        public string GetFormattedPrice()
+        {
+            double convertedPrice = CurrencyService.ConvertPrice(Price);
+            string symbol = CurrencyService.GetCurrencySymbol();
+            return $"{convertedPrice:F2} {symbol}";
+        }
+
 
 
 

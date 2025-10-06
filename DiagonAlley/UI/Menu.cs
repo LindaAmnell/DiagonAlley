@@ -22,7 +22,8 @@ namespace DiagonAlley.UI
             Console.WriteLine("[1] Shop products");
             Console.WriteLine("[2] View cart");
             Console.WriteLine("[3] Checkout");
-            Console.WriteLine("[4] Log out\n");
+            Console.WriteLine($"[4] Change currency (Current: {CurrencyService.CurrentCurrency})");
+            Console.WriteLine("[5] Log out\n");
 
 
             return InputHelper.AskForChoice();
@@ -62,17 +63,15 @@ namespace DiagonAlley.UI
                 return "3";
             }
 
-            //Console.WriteLine("\n═══════════  Checkout ═══════════ ");
             Console.WriteLine("What would you like to do?");
 
-            Console.WriteLine(" [1] Confirm purchase and pay       ");
-            Console.WriteLine(" [2] Clear cart (remove all items)  ");
-            Console.WriteLine(" [3] Cancel and go back\n             ");
-
-
+            Console.WriteLine(" [1] Confirm purchase and pay");
+            Console.WriteLine(" [2] Clear cart (remove all items)");
+            Console.WriteLine(" [3] Cancel and go back\n");
 
             return InputHelper.AskForChoice();
         }
+
 
     }
 }

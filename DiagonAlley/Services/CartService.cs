@@ -9,7 +9,7 @@ namespace DiagonAlley.Services
         public static void ShowCart(Wizard w)
         {
             ScreenHelper.RefreshScreen();
-            Console.WriteLine($" ════════ {w.Name}'s Cart ════════");
+            Console.WriteLine($"════════ {w.Name}'s Cart ════════");
             if (w.Cart.Count == 0)
             {
                 Console.WriteLine(" Emty\n");
@@ -20,8 +20,10 @@ namespace DiagonAlley.Services
             {
                 Console.WriteLine(item);
             }
-            //Console.WriteLine("══════════════════════ ");
-            Console.WriteLine($"Total: {w.CartTotal()} kr");
+            Console.WriteLine($"═══════════════════════════════");
+
+            Console.WriteLine($"Total: {CurrencyService.FormatPrice(w.CartTotal())}\n");
+
 
         }
 
@@ -30,13 +32,17 @@ namespace DiagonAlley.Services
             double total = w.CartTotal();
             double discountedTotal = w.ApplayDiscont(total);
 
+            string totalFormatted = CurrencyService.FormatPrice(total);
+            string discountedFormatted = CurrencyService.FormatPrice(total - discountedTotal);
+            string finalFormatted = CurrencyService.FormatPrice(discountedTotal);
+
             ScreenHelper.RefreshScreen();
             Console.WriteLine("═══════════ Diagon Alley Checkout ═══════════");
             Console.WriteLine($" Customer: {w.Name}");
             Console.WriteLine($" Level: {w.Level} — {w.Discount * 100}% discount");
-            Console.WriteLine($" Original price: {total:F2} kr");
-            Console.WriteLine($" Discount: {(total - discountedTotal):F2} kr");
-            Console.WriteLine($" Final amount: {discountedTotal:F2} kr");
+            Console.WriteLine($" Original price: {totalFormatted}");
+            Console.WriteLine($" Discount: {discountedFormatted}");
+            Console.WriteLine($" Final amount: {finalFormatted}");
             Console.WriteLine("═════════════════════════════════════════════");
             Console.WriteLine("\nThank you for shopping at Diagon Alley!");
 

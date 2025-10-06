@@ -1,4 +1,6 @@
-﻿namespace DiagonAlley.Models
+﻿using DiagonAlley.Services;
+
+namespace DiagonAlley.Models
 {
     public class CartItem
     {
@@ -19,9 +21,10 @@
 
         public override string ToString()
         {
-            return $"{Amount} x {Product.Name} = {TotalPrice()} ";
+            double totalSek = TotalPrice();
+            string formattedPrice = CurrencyService.FormatPrice(totalSek);
+            return $"{Amount} x {Product.Name} = {formattedPrice}";
         }
-
 
     }
 }
