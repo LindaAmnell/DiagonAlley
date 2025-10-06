@@ -33,29 +33,32 @@ namespace DiagonAlley.UI
                         Console.WriteLine("Invalid choice, try again.");
                         break;
                 }
-                InputHelper.Pause();
+
 
             }
         }
 
-        private void HandleCustomerMenu(Wizard wizard)
+        private void HandleCustomerMenu(Wizard w)
         {
             bool loggedIn = true;
             while (loggedIn)
             {
-                string customerChoice = Menu.ShowCustomerMenu(wizard.Name);
+                string customerChoice = Menu.ShowCustomerMenu(w.Name);
                 switch (customerChoice)
                 {
                     case "1":
-                        ProductsMenu(wizard);
+                        ProductsMenu(w);
                         break;
                     case "2":
-                        CartService.ShowCart(wizard);
+                        CartService.ShowCart(w);
+                        InputHelper.Pause();
                         break;
                     case "3":
-                        CheckoutMenu(wizard);
+                        CheckoutMenu(w);
                         break;
                     case "4":
+                        Console.WriteLine($"{w.Name} has exited Diagon Alley.");
+                        Console.ReadKey();
                         loggedIn = false;
                         break;
                     default:
@@ -65,7 +68,7 @@ namespace DiagonAlley.UI
             }
         }
 
-        private void ProductsMenu(Wizard wizard)
+        private void ProductsMenu(Wizard w)
         {
             bool isShopping = true;
 
@@ -93,33 +96,41 @@ namespace DiagonAlley.UI
                 }
                 if (chosen != null && amount > 0)
                 {
-                    wizard.AddToCart(chosen, amount);
-                    Console.WriteLine($"{amount} x {chosen.Name} has been added to your cart!");
+                    w.AddToCart(chosen, amount);
+                    Console.WriteLine($"{amount} x {chosen.Name} has been added to your cart!\n");
                     InputHelper.Pause();
                 }
-                Console.WriteLine("hej");
             }
         }
 
-        private void CheckoutMenu(Wizard wizard)
+        private void CheckoutMenu(Wizard w)
         {
-            var checkoutChoice = Menu.ShowCheckoutMenu(wizard);
-
-            switch (checkoutChoice)
+            bool stayInMenu = true;
+            while (stayInMenu)
             {
-                case "1":
-                    CartService.ConfirmPurchase(wizard);
-                    break;
-                case "2":
-                    CartService.ClearWizardCart(wizard);
-                    break;
-                case "3":
-                    Console.WriteLine("Returning to menu...");
+                var checkoutChoice = Menu.ShowCheckoutMenu(w);
 
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice.");
-                    break;
+                switch (checkoutChoice)
+                {
+                    case "1":
+                        CartService.ConfirmPurchase(w);
+                        break;
+                    case "2":
+                        CartService.ClearWizardCart(w);
+                        break;
+                    case "3":
+                        //Console.WriteLine("Returning to main menu...");
+                        stayInMenu = false;
+                        break;
+                    case "goToProducts":
+                        ProductsMenu(w);
+                        stayInMenu = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+                }
+
             }
             InputHelper.Pause();
 

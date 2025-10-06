@@ -43,9 +43,9 @@
 // [ ] - Rabatt (endast om VG-krav implementeras)
 // [X] - Rensa kundvagnen efter avslutad betalning (frivilligt, EJ krav)
 
-// [ ] Logga ut
+// [x] Logga ut
 //     - Gå tillbaka till startmenyn
-//     - Kundens kundvagn sparas i objektet tills man stänger programmet
+//    
 
 // [X] Pre-definiera 3 kunder i programmet
 //     - Kund1: Knatte / 123
@@ -71,13 +71,13 @@
 //     - Undvik duplicerad eller onödig kod
 //     - Lätt att bygga ut (ex. fler produkter/kunder)
 
-// [ ] Implementera kundnivåer (arv från Customer)
+// [x] Implementera kundnivåer (arv från Customer)
 //     - Bronze: 5% rabatt
 //     - Silver: 10% rabatt
 //     - Gold: 15% rabatt
 //     - Rabatt ska dras på hela köpet i kassan
 
-// [ ] Spara registrerade kunder mellan körningar
+// [x] Spara registrerade kunder mellan körningar
 //     - Använd t.ex. en textfil
 //     - Vid start: läs in kunder från fil
 //     - Vid registrering: spara ner ny kund till fil

@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return $"{Name} Core: {Core}, Length: {Length} - {Price} kr ";
+            return $"{Name} Core: {Core} | Length: {Length} inches | {Price} kr ";
         }
 
 

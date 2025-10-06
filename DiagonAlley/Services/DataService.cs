@@ -18,15 +18,10 @@ namespace DiagonAlley.Services
             new Broomstick("Firebolt", 1500, 0, 200, "Nimbus Racing Brooms Ltd."),
             new Broomstick("Nimbus 2000", 1000, 0, 150, "Nimbus Racing Brooms Ltd."),
             new Broomstick("Cleansweep Seven", 700, 0, 120, "Cleansweep Co.")
-            };
-
-        private static List<Wizard> wizards = new List<Wizard>
-        {
-            new Wizard("Harry Potter", "123" , "Wizard"),
-            new Wizard("Hermione Granger", "321"," Witch"),
-            new Wizard("Ron Weasley", "213", "Wizard")
         };
 
+
+        private static List<Wizard> wizards = CustomerFileService.LoadWizards();
 
         public static List<T> GetProductByType<T>() where T : Product
         {
@@ -38,9 +33,10 @@ namespace DiagonAlley.Services
             return wizards;
         }
 
-        public static void AddWizard(Wizard wizard)
+        public static void AddWizard(Wizard w)
         {
-            wizards.Add(wizard);
+            wizards.Add(w);
+            CustomerFileService.SaveWizards(wizards);
         }
     }
 }

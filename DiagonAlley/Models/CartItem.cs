@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return $"{Amount} x {Product.Name} = {TotalPrice()} kr";
+            return $"{Amount} x {Product.Name} = {TotalPrice()} ";
         }
 
 

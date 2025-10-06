@@ -5,10 +5,9 @@ namespace DiagonAlley.Services
 {
     public class WizardService
     {
-
         public Wizard RegisterCustomer()
         {
-            Console.Clear();
+            ScreenHelper.RefreshScreen();
             Console.WriteLine("Welcome to  Diagon Alley!");
             Console.WriteLine("Time for registration\n");
 
@@ -25,17 +24,37 @@ namespace DiagonAlley.Services
                 role = Console.ReadLine().ToLower();
             }
 
-            Wizard w = new Wizard(name, password, role);
+            Console.WriteLine("\nChoose your level:");
+            Console.WriteLine("[1] None (0% discount)");
+            Console.WriteLine("[2] Bronze (5% discount)");
+            Console.WriteLine("[3] Silver (10% discount)");
+            Console.WriteLine("[4] Gold (15% discount)");
+            Console.Write("Enter choice (1–4): ");
+
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
+            {
+                Console.WriteLine("Invalid choice. Please enter 1–4:");
+            }
+
+            Wizard w = choice switch
+            {
+                4 => new GoldWizard(name, password, role),
+                3 => new SilverWizard(name, password, role),
+                2 => new BronzeWizard(name, password, role),
+                _ => new Wizard(name, password, role)
+            };
+
             DataService.AddWizard(w);
 
-            Console.WriteLine($"\nWelcome to Diagon Alley, {role} {name}! You have been registered successfully.");
+            Console.WriteLine($"\nWelcome to Diagon Alley,¨{w.Level} {role} {name}! You have been registered successfully.");
             InputHelper.Pause();
             return w;
         }
 
         public Wizard LogIn()
         {
-            Console.Clear();
+            ScreenHelper.RefreshScreen();
             Console.WriteLine("Login to Diagon Alley\n");
 
             string name = InputHelper.AskForChoice("Enter name: ");
@@ -53,20 +72,21 @@ namespace DiagonAlley.Services
 
         }
 
-        private Wizard CheckPassword(Wizard wizard)
+        private Wizard CheckPassword(Wizard w)
         {
             string password = InputHelper.AskForInput("Enter password: ");
 
-            while (!wizard.VerifyPassword(password))
+            while (!w.VerifyPassword(password))
             {
                 Console.WriteLine("Incorrect password. Try again...");
                 Console.Write("Password: ");
                 password = Console.ReadLine();
             }
 
-            Console.WriteLine($"\nWelcome back, {wizard.Name}!");
+            Console.WriteLine($"\nWelcome back, {w.Level} member {w.Name} the {w.Role}!");
+
             InputHelper.Pause();
-            return wizard;
+            return w;
         }
 
         private Wizard RegisterIfNotFound()
@@ -89,3 +109,4 @@ namespace DiagonAlley.Services
         }
     }
 }
+

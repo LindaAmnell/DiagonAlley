@@ -6,6 +6,7 @@ namespace DiagonAlley
     {
         static void Main(string[] args)
         {
+            ScreenHelper.PrintHeader();
             var store = new StoreController();
             store.RunStore();
         }
