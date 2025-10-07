@@ -5,6 +5,7 @@ namespace DiagonAlley.UI
 {
     public class StoreController
     {
+        public static Currency SelectedCurrency { get; private set; } = Currency.SEK;
         private readonly WizardService wizardService = new WizardService();
         public void RunStore()
         {
@@ -43,7 +44,7 @@ namespace DiagonAlley.UI
             bool loggedIn = true;
             while (loggedIn)
             {
-                string customerChoice = Menu.ShowCustomerMenu(w.Name);
+                string customerChoice = Menu.ShowCustomerMenu(w.Name, SelectedCurrency);
                 switch (customerChoice)
                 {
                     case "1":
@@ -57,7 +58,7 @@ namespace DiagonAlley.UI
                         CheckoutMenu(w);
                         break;
                     case "4":
-                        CurrencyMenuService.ChangeCurrencyMenu();
+                        SelectedCurrency = Menu.ChooseCurrency();
                         break;
                     case "5":
                         Console.WriteLine($"{w.Name} has exited Diagon Alley.");
@@ -116,10 +117,12 @@ namespace DiagonAlley.UI
                 switch (checkoutChoice)
                 {
                     case "1":
-                        CartService.ConfirmPurchase(w);
+                        CartService.ConfirmPurchase(w, SelectedCurrency);
+
                         break;
                     case "2":
-                        CartService.ClearWizardCart(w);
+                        CartService.ClearWizardCart(w, SelectedCurrency);
+
                         break;
                     case "3":
                         //Console.WriteLine("Returning to main menu...");

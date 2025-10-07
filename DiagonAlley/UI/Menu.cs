@@ -14,7 +14,7 @@ namespace DiagonAlley.UI
 
             return InputHelper.AskForChoice();
         }
-        public static string ShowCustomerMenu(string customerName)
+        public static string ShowCustomerMenu(string customerName, Currency currentCurrency)
         {
             ScreenHelper.RefreshScreen();
             Console.WriteLine($"Welcome {customerName}!\n");
@@ -22,9 +22,8 @@ namespace DiagonAlley.UI
             Console.WriteLine("[1] Shop products");
             Console.WriteLine("[2] View cart");
             Console.WriteLine("[3] Checkout");
-            Console.WriteLine($"[4] Change currency (Current: {CurrencyService.CurrentCurrency})");
+            Console.WriteLine($"[4] Change currency (Current: {currentCurrency})");
             Console.WriteLine("[5] Log out\n");
-
 
             return InputHelper.AskForChoice();
         }
@@ -38,7 +37,6 @@ namespace DiagonAlley.UI
             Console.WriteLine("[2] Potion");
             Console.WriteLine("[3] BromStick");
             Console.WriteLine("[4] Exit shop\n");
-
 
             return InputHelper.AskForChoice();
 
@@ -72,7 +70,23 @@ namespace DiagonAlley.UI
             return InputHelper.AskForChoice();
         }
 
+        public static Currency ChooseCurrency()
+        {
+            Console.WriteLine("\nVälj valuta:");
+            Console.WriteLine("1. SEK");
+            Console.WriteLine("2. USD");
+            Console.WriteLine("3. EUR");
+            Console.Write("Val: ");
+            string input = Console.ReadLine();
 
+            return input switch
+            {
+                "1" => Currency.SEK,
+                "2" => Currency.USD,
+                "3" => Currency.EUR,
+                _ => Currency.SEK
+            };
+        }
     }
 }
 

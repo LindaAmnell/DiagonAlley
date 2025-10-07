@@ -22,44 +22,43 @@ namespace DiagonAlley.Services
             }
             Console.WriteLine($"═══════════════════════════════");
 
-            Console.WriteLine($"Total: {CurrencyService.FormatPrice(w.CartTotal())}\n");
+            double totalSEK = w.CartTotal();
+            double totalConverted = CurrencyConverter.ConvertFromSEK(totalSEK, StoreController.SelectedCurrency);
+            Console.WriteLine($"Total: {totalConverted:F2} {StoreController.SelectedCurrency}\n");
+
+
 
 
         }
 
-        public static void ConfirmPurchase(Wizard w)
+        public static void ConfirmPurchase(Wizard w, Currency selectedCurrency)
         {
-            double total = w.CartTotal();
-            double discountedTotal = w.ApplayDiscont(total);
+            double totalSEK = w.CartTotal();
+            double discountedTotalSEK = w.ApplayDiscont(totalSEK);
 
-            string totalFormatted = CurrencyService.FormatPrice(total);
-            string discountedFormatted = CurrencyService.FormatPrice(total - discountedTotal);
-            string finalFormatted = CurrencyService.FormatPrice(discountedTotal);
+            double totalConverted = CurrencyConverter.ConvertFromSEK(totalSEK, selectedCurrency);
+            double discountedConverted = CurrencyConverter.ConvertFromSEK(discountedTotalSEK, selectedCurrency);
 
-            ScreenHelper.RefreshScreen();
-            Console.WriteLine("═══════════ Diagon Alley Checkout ═══════════");
+            Console.WriteLine("\n═══════════ Diagon Alley Checkout ═══════════");
             Console.WriteLine($" Customer: {w.Name}");
             Console.WriteLine($" Level: {w.Level} — {w.Discount * 100}% discount");
-            Console.WriteLine($" Original price: {totalFormatted}");
-            Console.WriteLine($" Discount: {discountedFormatted}");
-            Console.WriteLine($" Final amount: {finalFormatted}");
+            Console.WriteLine($" Original price: {totalConverted:F2} {selectedCurrency}");
+            Console.WriteLine($" After discount: {discountedConverted:F2} {selectedCurrency}");
             Console.WriteLine("═════════════════════════════════════════════");
             Console.WriteLine("\nThank you for shopping at Diagon Alley!");
 
-
             w.ClearCart();
             InputHelper.Pause();
-            Menu.ShowCustomerMenu(w.Name);
-
+            Menu.ShowCustomerMenu(w.Name, selectedCurrency);
         }
-        public static void ClearWizardCart(Wizard w)
+        public static void ClearWizardCart(Wizard w, Currency currentCurrency)
         {
             w.ClearCart();
             Console.WriteLine("Your cart has been magically emptied.");
             InputHelper.Pause();
-            Menu.ShowCustomerMenu(w.Name);
-
+            Menu.ShowCustomerMenu(w.Name, currentCurrency);
         }
+
 
 
     }

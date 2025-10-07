@@ -1,4 +1,5 @@
 ﻿using DiagonAlley.Services;
+using DiagonAlley.UI;
 
 namespace DiagonAlley.Models
 {
@@ -22,9 +23,10 @@ namespace DiagonAlley.Models
         public override string ToString()
         {
             double totalSek = TotalPrice();
-            string formattedPrice = CurrencyService.FormatPrice(totalSek);
-            return $"{Amount} x {Product.Name} = {formattedPrice}";
+            double converted = CurrencyConverter.ConvertFromSEK(totalSek, StoreController.SelectedCurrency);
+            return $"{Amount} x {Product.Name} = {converted:F2} {StoreController.SelectedCurrency}";
         }
+
 
     }
 }

@@ -22,11 +22,11 @@ namespace DiagonAlley.Models
         {
             return Price * Amount;
         }
-        public string GetFormattedPrice()
+
+        public string GetFormattedPrice(Currency currency)
         {
-            double convertedPrice = CurrencyService.ConvertPrice(Price);
-            string symbol = CurrencyService.GetCurrencySymbol();
-            return $"{convertedPrice:F2} {symbol}";
+            double convertedPrice = CurrencyConverter.ConvertFromSEK(Price, currency);
+            return $"{convertedPrice:F2} {currency}";
         }
 
 
