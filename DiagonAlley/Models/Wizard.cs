@@ -42,7 +42,6 @@ namespace DiagonAlley.Models
 
         public string GetPassword() => Password;
 
-
         public double CartTotal()
         {
             return cart.Sum(p => p.TotalPrice());
@@ -81,7 +80,6 @@ namespace DiagonAlley.Models
             }
 
             string totalFormatted = CurrencyConverter.Format(totalSEK, StoreController.SelectedCurrency);
-
 
             return
                 $"Name: {Name} | Role: {Role} | Level: {Level} | Password {Password}\n" +

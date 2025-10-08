@@ -139,10 +139,7 @@ namespace DiagonAlley.UI
                         Console.WriteLine("Invalid choice.");
                         break;
                 }
-
             }
-           ;
-
         }
     }
 }

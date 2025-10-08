@@ -7,7 +7,6 @@
         {
             Console.Write(message);
             return Console.ReadLine() ?? "";
-
         }
 
         public static void Pause(string message = "Press any key to continue..")
@@ -22,7 +21,6 @@
             string input = Console.ReadLine();
 
             return input;
-
         }
 
         public static string NonEmptyInput(string message)
@@ -56,8 +54,5 @@
                 Console.WriteLine("Please type 'yes' or 'no'.");
             }
         }
-
-
-
     }
 }

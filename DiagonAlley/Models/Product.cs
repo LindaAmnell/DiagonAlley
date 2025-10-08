@@ -5,7 +5,6 @@ namespace DiagonAlley.Models
 {
     public abstract class Product
     {
-
         public string Name { get; private set; }
 
         public double Price { get; private set; }
@@ -28,9 +27,5 @@ namespace DiagonAlley.Models
         {
             return CurrencyConverter.Format(Price, StoreController.SelectedCurrency);
         }
-
-
-
-
     }
 }

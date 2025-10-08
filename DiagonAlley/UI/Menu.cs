@@ -25,7 +25,6 @@ namespace DiagonAlley.UI
 
             return InputHelper.AskForChoice();
         }
-
         public static string ShowCustomerMenu(Wizard w, Currency currentCurrency)
         {
             Console.Clear();
@@ -35,7 +34,6 @@ namespace DiagonAlley.UI
             Console.WriteLine("[3] Checkout");
             Console.WriteLine($"[4] Change currency (Current: {currentCurrency})");
             Console.WriteLine("[5] Log out\n");
-
 
             return InputHelper.AskForChoice();
         }

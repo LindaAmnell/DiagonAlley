@@ -62,7 +62,6 @@ namespace DiagonAlley.UI
             return (chosen, amount);
         }
 
-
         private static void PrintHeaderFor<T>() where T : Product
         {
             if (typeof(T) == typeof(Wand))

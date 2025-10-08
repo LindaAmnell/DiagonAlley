@@ -20,7 +20,6 @@ namespace DiagonAlley.Services
             new Broomstick("Cleansweep Seven", 700, 0, 120, "Cleansweep Co.")
         };
 
-
         private static List<Wizard> wizards = CustomerFileService.LoadWizards();
 
         public static List<T> GetProductByType<T>() where T : Product

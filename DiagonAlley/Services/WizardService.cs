@@ -105,7 +105,6 @@ namespace DiagonAlley.Services
             {
                 return RegisterIfNotFound();
             }
-
         }
 
         private Wizard CheckPassword(Wizard w)

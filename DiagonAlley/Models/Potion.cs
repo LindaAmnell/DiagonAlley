@@ -2,7 +2,6 @@
 {
     public class Potion : Product
     {
-
         public string Effect { get; private set; }
         public int Duration { get; private set; }
 
@@ -16,7 +15,6 @@
         {
             return $"{Name,-18} | {Effect,-16} | {Duration,6} min | {GetFormattedPrice(),12} |";
         }
-
 
     }
 }

@@ -39,16 +39,12 @@ namespace DiagonAlley.UI
             Console.SetCursorPosition(0, startLine);
         }
 
-
         public static void RefreshScreen()
         {
             Console.Clear();
             PrintHeader();
             Console.SetCursorPosition(0, 4);
         }
-
     }
-
-
 
 }

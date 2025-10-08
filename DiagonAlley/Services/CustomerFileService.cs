@@ -54,14 +54,8 @@ namespace DiagonAlley.Services
 
                     wizards.Add(w);
                 }
-
-
-
             }
             return wizards;
         }
     }
 }
-//if (!wizards.Any(x => x.Name == w.Name))
-//    writer.WriteLine($"{w.Name},{w.GetPassword()},{w.Role},{w.Level}");
-//*/

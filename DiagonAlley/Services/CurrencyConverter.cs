@@ -20,7 +20,6 @@ namespace DiagonAlley.Services
             };
         }
 
-
         public static void ShowAvailableCurrencies()
         {
             Console.WriteLine("\nAvailable currencies:");
@@ -29,7 +28,6 @@ namespace DiagonAlley.Services
                 Console.WriteLine($"- {currency} ({GetSymbol(currency)})");
             }
         }
-
 
         public static string Format(double amount, Currency currency)
         {

@@ -54,8 +54,5 @@ namespace DiagonAlley.Services
             Console.WriteLine("Your cart has been magically emptied.");
             InputHelper.Pause();
         }
-
-
-
     }
 }
