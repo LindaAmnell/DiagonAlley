@@ -1,4 +1,5 @@
 ﻿using DiagonAlley.Services;
+using DiagonAlley.UI;
 
 namespace DiagonAlley.Models
 {
@@ -23,10 +24,9 @@ namespace DiagonAlley.Models
             return Price * Amount;
         }
 
-        public string GetFormattedPrice(Currency currency)
+        protected string GetFormattedPrice()
         {
-            double convertedPrice = CurrencyConverter.ConvertFromSEK(Price, currency);
-            return $"{convertedPrice:F2} {currency}";
+            return CurrencyConverter.Format(Price, StoreController.SelectedCurrency);
         }
 
 

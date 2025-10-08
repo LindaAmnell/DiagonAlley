@@ -14,16 +14,28 @@ namespace DiagonAlley.UI
 
             return InputHelper.AskForChoice();
         }
-        public static string ShowCustomerMenu(string customerName, Currency currentCurrency)
+        public static string ShowLevelMenu()
         {
-            ScreenHelper.RefreshScreen();
-            Console.WriteLine($"Welcome {customerName}!\n");
+            Console.WriteLine("\nChoose your level:");
+            Console.WriteLine("[1] None (0% discount)");
+            Console.WriteLine("[2] Bronze (5% discount)");
+            Console.WriteLine("[3] Silver (10% discount)");
+            Console.WriteLine("[4] Gold (15% discount)");
+            Console.Write("Enter choice (1–4): ");
 
-            Console.WriteLine("[1] Shop products");
+            return InputHelper.AskForChoice();
+        }
+
+        public static string ShowCustomerMenu(Wizard w, Currency currentCurrency)
+        {
+            Console.Clear();
+            ScreenHelper.PrintHeader(w, currentCurrency);
+            Console.WriteLine("\n[1] Shop products");
             Console.WriteLine("[2] View cart");
             Console.WriteLine("[3] Checkout");
             Console.WriteLine($"[4] Change currency (Current: {currentCurrency})");
             Console.WriteLine("[5] Log out\n");
+
 
             return InputHelper.AskForChoice();
         }
@@ -31,15 +43,13 @@ namespace DiagonAlley.UI
         public static string ShowAllProductsMenu()
         {
             ScreenHelper.RefreshScreen();
-            Console.WriteLine("What magical item do you seek?");
-
+            Console.WriteLine("What magical item do you seek?\n");
             Console.WriteLine("[1] Wand");
             Console.WriteLine("[2] Potion");
             Console.WriteLine("[3] BromStick");
             Console.WriteLine("[4] Exit shop\n");
 
             return InputHelper.AskForChoice();
-
         }
 
         public static string ShowCheckoutMenu(Wizard w)
@@ -50,10 +60,7 @@ namespace DiagonAlley.UI
             if (w.Cart == null || w.Cart.Count == 0)
             {
                 Console.WriteLine("\nYou need to buy something before you can checkout.");
-                Console.Write("Would you like to go to the product menu? (yes/no): ");
-                string answer = Console.ReadLine().Trim().ToLower();
-
-                if (answer == "yes" || answer == "y")
+                if (InputHelper.YesOrNo("Would you like to go to the product menu?"))
                 {
                     return "goToProducts";
                 }
@@ -62,21 +69,20 @@ namespace DiagonAlley.UI
             }
 
             Console.WriteLine("What would you like to do?");
-
-            Console.WriteLine(" [1] Confirm purchase and pay");
-            Console.WriteLine(" [2] Clear cart (remove all items)");
-            Console.WriteLine(" [3] Cancel and go back\n");
+            Console.WriteLine("[1] Confirm purchase and pay");
+            Console.WriteLine("[2] Clear cart (remove all items)");
+            Console.WriteLine("[3] Cancel and go back\n");
 
             return InputHelper.AskForChoice();
         }
 
         public static Currency ChooseCurrency()
         {
-            Console.WriteLine("\nVälj valuta:");
+            Console.WriteLine("\nSelect currency:");
             Console.WriteLine("1. SEK");
             Console.WriteLine("2. USD");
             Console.WriteLine("3. EUR");
-            Console.Write("Val: ");
+            Console.Write("Choose: ");
             string input = Console.ReadLine();
 
             return input switch

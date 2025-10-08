@@ -1,6 +1,4 @@
-﻿using DiagonAlley.UI;
-
-namespace DiagonAlley.Models
+﻿namespace DiagonAlley.Models
 {
     public class Wand : Product
     {
@@ -15,7 +13,7 @@ namespace DiagonAlley.Models
 
         public override string ToString()
         {
-            return $"{Name} | Core: {Core} | Length: {Length}\" | {GetFormattedPrice(StoreController.SelectedCurrency)}";
+            return $"{Name,-18} | {Core,-20} | {Length,5}\" | {GetFormattedPrice(),12} |";
         }
 
     }

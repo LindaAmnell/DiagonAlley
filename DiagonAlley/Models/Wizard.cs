@@ -1,9 +1,11 @@
-﻿namespace DiagonAlley.Models
-{
+﻿using DiagonAlley.Services;
+using DiagonAlley.UI;
 
+namespace DiagonAlley.Models
+{
     public enum WizardLevel
     {
-        None,
+        Regular,
         Bronze,
         Silver,
         Gold
@@ -13,7 +15,7 @@
         public string Name { get; private set; }
         private string Password { get; set; }
         public string Role { get; private set; }
-        public WizardLevel Level { get; protected set; } = WizardLevel.None;
+        public WizardLevel Level { get; protected set; } = WizardLevel.Regular;
         public double Discount { get; protected set; } = 0.0;
 
         private readonly List<CartItem> cart = new List<CartItem>();
@@ -62,26 +64,31 @@
 
         public override string ToString()
         {
-
             if (cart.Count == 0)
-                return $"Name: {Name} | Password: {Password} | Cart: Empty";
+                return $"Name: {Name} | Role: {Role} | Level: {Level}\n "
+                    + "--Cart Empty--";
 
             string cartContent = "";
-            double total = 0;
+            double totalSEK = 0;
 
             foreach (CartItem c in cart)
             {
-                double productTotal = c.TotalPrice();
-                cartContent += $"{c.Amount} x {c.Product.Name} = {productTotal}\n";
-                total += productTotal;
+                double productTotalSEK = c.TotalPrice();
+                double productTotalConverted = CurrencyConverter.ConvertFromSEK(productTotalSEK, StoreController.SelectedCurrency);
+
+                cartContent += $"{c.Amount} x {c.Product.Name} = {productTotalConverted:F2} {StoreController.SelectedCurrency}\n";
+                totalSEK += productTotalSEK;
             }
 
-            return $"Name: {Role} [{Level}] {Name} | Password: {Password}\n" +
-                   "----- Cart -----\n" +
-                   $"{cartContent}" +
-                   $"----------------\n" +
-                   $"Total: {total}";
-        }
+            string totalFormatted = CurrencyConverter.Format(totalSEK, StoreController.SelectedCurrency);
 
+
+            return
+                $"Name: {Name} | Role: {Role} | Level: {Level} | Password {Password}\n" +
+                $"══════════════════════════════════════════════════════════════\n" +
+                $"{cartContent}" +
+                $"══════════════════════════════════════════════════════════════\n" +
+                $"Total: {totalFormatted}\n";
+        }
     }
 }

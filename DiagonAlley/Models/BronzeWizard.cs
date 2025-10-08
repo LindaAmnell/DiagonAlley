@@ -1,6 +1,6 @@
 ﻿namespace DiagonAlley.Models
 {
-    internal class BronzeWizard : Wizard
+    public class BronzeWizard : Wizard
     {
         public BronzeWizard(string name, string password, string role) : base(name, password, role)
         {

@@ -6,6 +6,7 @@ namespace DiagonAlley.UI
     public class StoreController
     {
         public static Currency SelectedCurrency { get; private set; } = Currency.SEK;
+
         private readonly WizardService wizardService = new WizardService();
         public void RunStore()
         {
@@ -17,7 +18,11 @@ namespace DiagonAlley.UI
                 switch (choice)
                 {
                     case "1":
-                        wizardService.RegisterCustomer();
+                        var newWizard = wizardService.RegisterCustomer();
+                        if (newWizard != null)
+                        {
+                            HandleCustomerMenu(newWizard);
+                        }
                         break;
                     case "2":
                         var wizard = wizardService.LogIn();
@@ -34,8 +39,6 @@ namespace DiagonAlley.UI
                         Console.WriteLine("Invalid choice, try again.");
                         break;
                 }
-
-
             }
         }
 
@@ -44,7 +47,7 @@ namespace DiagonAlley.UI
             bool loggedIn = true;
             while (loggedIn)
             {
-                string customerChoice = Menu.ShowCustomerMenu(w.Name, SelectedCurrency);
+                string customerChoice = Menu.ShowCustomerMenu(w, SelectedCurrency);
                 switch (customerChoice)
                 {
                     case "1":
@@ -93,6 +96,7 @@ namespace DiagonAlley.UI
                         break;
                     case "4":
                         isShopping = false;
+                        Console.WriteLine("Leving shop..");
                         break;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
@@ -101,7 +105,7 @@ namespace DiagonAlley.UI
                 if (chosen != null && amount > 0)
                 {
                     w.AddToCart(chosen, amount);
-                    Console.WriteLine($"{amount} x {chosen.Name} has been added to your cart!\n");
+                    Console.WriteLine($"\n{amount} x {chosen.Name} has been added to your cart!\n");
                     InputHelper.Pause();
                 }
             }
@@ -118,14 +122,13 @@ namespace DiagonAlley.UI
                 {
                     case "1":
                         CartService.ConfirmPurchase(w, SelectedCurrency);
-
+                        stayInMenu = false;
                         break;
                     case "2":
                         CartService.ClearWizardCart(w, SelectedCurrency);
-
+                        stayInMenu = false;
                         break;
                     case "3":
-                        //Console.WriteLine("Returning to main menu...");
                         stayInMenu = false;
                         break;
                     case "goToProducts":
@@ -138,7 +141,7 @@ namespace DiagonAlley.UI
                 }
 
             }
-            InputHelper.Pause();
+           ;
 
         }
     }

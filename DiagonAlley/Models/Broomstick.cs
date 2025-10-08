@@ -1,6 +1,4 @@
-﻿using DiagonAlley.UI;
-
-namespace DiagonAlley.Models
+﻿namespace DiagonAlley.Models
 {
     public class Broomstick : Product
     {
@@ -14,8 +12,9 @@ namespace DiagonAlley.Models
         }
         public override string ToString()
         {
-            return $"{Name} | Speed: {Speed} km/h | Brand: {Model} | {GetFormattedPrice(StoreController.SelectedCurrency)}";
+            return $"{Name,-18} | {Model,-26} | {Speed,4} km/h | {GetFormattedPrice(),12} |";
         }
+
 
     }
 }

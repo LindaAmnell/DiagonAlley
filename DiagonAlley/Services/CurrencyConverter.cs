@@ -4,44 +4,40 @@ namespace DiagonAlley.Services
 {
     public static class CurrencyConverter
     {
-        private static readonly Dictionary<Currency, double> rates = new()
-    {
-            { Currency.SEK, 1.0 },
-            { Currency.USD, 0.09 },
-            { Currency.EUR, 0.085 }
-    };
 
         public static double ConvertFromSEK(double amount, Currency toCurrency)
         {
-            return amount * rates[toCurrency];
+            return amount / (int)toCurrency;
         }
-
-        public static void ShowAvailableCurrencies()
+        private static string GetSymbol(Currency currency)
         {
-            Console.WriteLine("Tillgängliga valutor:");
-            foreach (var c in rates)
+            return currency switch
             {
-                Console.WriteLine($"- {c.Key} (kurs: {c.Value})");
-            }
-        }
-
-        public static Currency ChooseCurrency()
-        {
-            Console.WriteLine("\nVälj valuta:");
-            Console.WriteLine("1. SEK");
-            Console.WriteLine("2. USD");
-            Console.WriteLine("3. EUR");
-            Console.Write("Val: ");
-            string input = Console.ReadLine();
-
-            return input switch
-            {
-                "1" => Currency.SEK,
-                "2" => Currency.USD,
-                "3" => Currency.EUR,
-                _ => Currency.SEK
+                Currency.SEK => "kr",
+                Currency.USD => "$",
+                Currency.EUR => "€",
+                _ => ""
             };
         }
 
+
+        public static void ShowAvailableCurrencies()
+        {
+            Console.WriteLine("\nAvailable currencies:");
+            foreach (Currency currency in Enum.GetValues(typeof(Currency)))
+            {
+                Console.WriteLine($"- {currency} ({GetSymbol(currency)})");
+            }
+        }
+
+
+        public static string Format(double amount, Currency currency)
+        {
+            double converted = ConvertFromSEK(amount, currency);
+            string symbol = GetSymbol(currency);
+
+            return $"{converted:F2} {symbol}";
+        }
     }
 }
+

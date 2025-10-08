@@ -1,6 +1,4 @@
-﻿using DiagonAlley.UI;
-
-namespace DiagonAlley.Models
+﻿namespace DiagonAlley.Models
 {
     public class Potion : Product
     {
@@ -16,8 +14,9 @@ namespace DiagonAlley.Models
 
         public override string ToString()
         {
-            return $"{Name} | Effect: {Effect} | Duration: {Duration} min | {GetFormattedPrice(StoreController.SelectedCurrency)}";
+            return $"{Name,-18} | {Effect,-16} | {Duration,6} min | {GetFormattedPrice(),12} |";
         }
+
 
     }
 }

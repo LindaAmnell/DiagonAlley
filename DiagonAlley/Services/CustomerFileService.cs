@@ -42,7 +42,7 @@ namespace DiagonAlley.Services
 
                     WizardLevel level = Enum.TryParse(levelText, true, out WizardLevel parsedLevel)
                         ? parsedLevel
-                        : WizardLevel.None;
+                        : WizardLevel.Regular;
 
                     Wizard w = level switch
                     {
@@ -62,3 +62,6 @@ namespace DiagonAlley.Services
         }
     }
 }
+//if (!wizards.Any(x => x.Name == w.Name))
+//    writer.WriteLine($"{w.Name},{w.GetPassword()},{w.Role},{w.Level}");
+//*/
