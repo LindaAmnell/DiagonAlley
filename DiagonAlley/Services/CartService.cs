@@ -1,4 +1,5 @@
 ﻿using DiagonAlley.Models;
+using DiagonAlley.Models.Customer;
 using DiagonAlley.UI;
 
 namespace DiagonAlley.Services
@@ -16,16 +17,16 @@ namespace DiagonAlley.Services
         {
             ScreenHelper.RefreshScreen();
             double totalSEK = w.CartTotal();
-            double discountedTotalSEK = w.ApplayDiscont(totalSEK);
+            double discountedTotalSEK = w.ApplyDiscount(totalSEK);
 
-            double totalConverted = CurrencyConverter.ConvertFromSEK(totalSEK, selectedCurrency);
-            double discountedConverted = CurrencyConverter.ConvertFromSEK(discountedTotalSEK, selectedCurrency);
+            string totalFormatted = CurrencyConverter.Format(totalSEK, selectedCurrency);
+            string discountedFormatted = CurrencyConverter.Format(discountedTotalSEK, selectedCurrency);
 
             Console.WriteLine("═══════════ Diagon Alley Checkout ═══════════");
             Console.WriteLine($" Customer: {w.Name}");
-            Console.WriteLine($" Level: {w.Level} — {w.Discount * 100}% discount");
-            Console.WriteLine($" Original price: {totalConverted:F2} {selectedCurrency}");
-            Console.WriteLine($" After discount: {discountedConverted:F2} {selectedCurrency}");
+            Console.WriteLine($" Level: {w.Level} — {w.Discount * 100:0.#}% discount");
+            Console.WriteLine($" Original price: {totalFormatted}");
+            Console.WriteLine($" After discount: {discountedFormatted}");
             Console.WriteLine("═════════════════════════════════════════════\n");
 
             if (!InputHelper.YesOrNo("Do you want to confirm your purchase?"))
@@ -38,15 +39,13 @@ namespace DiagonAlley.Services
             Console.WriteLine("\nThank you for shopping at Diagon Alley!");
             w.ClearCart();
             InputHelper.Pause();
-            return;
         }
-        public static void ClearWizardCart(Wizard w, Currency currentCurrency)
+
+        public static void ClearWizardCart(Wizard w)
         {
             ScreenHelper.RefreshScreen();
             if (!InputHelper.YesOrNo("Are you sure you want to empty your cart?"))
             {
-                Console.WriteLine("\nCart was not cleared.");
-                InputHelper.Pause();
                 return;
             }
 

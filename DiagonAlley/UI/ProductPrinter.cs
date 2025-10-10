@@ -1,4 +1,4 @@
-﻿using DiagonAlley.Models;
+﻿using DiagonAlley.Models.Products;
 using DiagonAlley.Services;
 
 namespace DiagonAlley.UI
@@ -37,7 +37,7 @@ namespace DiagonAlley.UI
                 {
                     break;
                 }
-                Console.WriteLine("Invalid input. Please eenter a number from the list.");
+                Console.WriteLine("Invalid input. Please enter a number from the list.");
             }
 
             if (choice == 0)
@@ -51,13 +51,13 @@ namespace DiagonAlley.UI
 
             while (true)
             {
-                Console.Write("\nHow many do you whant to buy: ");
+                Console.Write("\nHow many do you want to buy: ");
                 var input = Console.ReadLine();
                 if (int.TryParse(input, out amount) && amount > 0)
                 {
                     break;
                 }
-                Console.WriteLine("Invalid amount. Please enter a positive number.");
+                Console.WriteLine("Invalid amount. Please enter a number.");
             }
             return (chosen, amount);
         }

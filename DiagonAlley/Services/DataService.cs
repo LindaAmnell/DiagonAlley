@@ -1,4 +1,5 @@
-﻿using DiagonAlley.Models;
+﻿using DiagonAlley.Models.Customer;
+using DiagonAlley.Models.Products;
 
 namespace DiagonAlley.Services
 {

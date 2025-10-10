@@ -1,4 +1,5 @@
 ﻿using DiagonAlley.Models;
+using DiagonAlley.Models.Customer;
 using DiagonAlley.Services;
 
 namespace DiagonAlley.UI
@@ -44,7 +45,7 @@ namespace DiagonAlley.UI
             Console.WriteLine("What magical item do you seek?\n");
             Console.WriteLine("[1] Wand");
             Console.WriteLine("[2] Potion");
-            Console.WriteLine("[3] BromStick");
+            Console.WriteLine("[3] Bromstick");
             Console.WriteLine("[4] Exit shop\n");
 
             return InputHelper.AskForChoice();
@@ -74,23 +75,19 @@ namespace DiagonAlley.UI
             return InputHelper.AskForChoice();
         }
 
-        public static Currency ChooseCurrency()
+        public static string ChooseCurrency()
         {
             Console.WriteLine("\nSelect currency:");
-            Console.WriteLine("1. SEK");
-            Console.WriteLine("2. USD");
-            Console.WriteLine("3. EUR");
+            Console.WriteLine("[1] SEK");
+            Console.WriteLine("[2] USD");
+            Console.WriteLine("[3] EUR");
             Console.Write("Choose: ");
-            string input = Console.ReadLine();
 
-            return input switch
-            {
-                "1" => Currency.SEK,
-                "2" => Currency.USD,
-                "3" => Currency.EUR,
-                _ => Currency.SEK
-            };
+            return InputHelper.AskForChoice();
+
         }
+
+
     }
 }
 

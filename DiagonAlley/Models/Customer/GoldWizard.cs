@@ -1,4 +1,4 @@
-﻿namespace DiagonAlley.Models
+﻿namespace DiagonAlley.Models.Customer
 {
     public class GoldWizard : Wizard
     {

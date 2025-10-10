@@ -1,7 +1,8 @@
-﻿using DiagonAlley.Services;
+﻿using DiagonAlley.Models.Products;
+using DiagonAlley.Services;
 using DiagonAlley.UI;
 
-namespace DiagonAlley.Models
+namespace DiagonAlley.Models.Customer
 {
     public enum WizardLevel
     {
@@ -30,7 +31,7 @@ namespace DiagonAlley.Models
             Role = role;
         }
 
-        public virtual double ApplayDiscont(double total)
+        public virtual double ApplyDiscount(double total)
         {
             return total * (1 - Discount);
         }
@@ -53,9 +54,17 @@ namespace DiagonAlley.Models
             {
                 return;
             }
-            cart.Add(new CartItem(p, amount));
-
+            var existing = cart.FirstOrDefault(c => c.Product.Name == p.Name);
+            if (existing != null)
+            {
+                existing.AddAmount(amount);
+            }
+            else
+            {
+                cart.Add(new CartItem(p, amount));
+            }
         }
+
         public void ClearCart()
         {
             cart.Clear();
@@ -65,18 +74,15 @@ namespace DiagonAlley.Models
         {
             if (cart.Count == 0)
                 return $"Name: {Name} | Role: {Role} | Level: {Level}\n "
-                    + "--Cart Empty--";
+                    + "--Cart Empty--\n";
 
             string cartContent = "";
             double totalSEK = 0;
 
             foreach (CartItem c in cart)
             {
-                double productTotalSEK = c.TotalPrice();
-                double productTotalConverted = CurrencyConverter.ConvertFromSEK(productTotalSEK, StoreController.SelectedCurrency);
-
-                cartContent += $"{c.Amount} x {c.Product.Name} = {productTotalConverted:F2} {StoreController.SelectedCurrency}\n";
-                totalSEK += productTotalSEK;
+                cartContent += c.ToString() + "\n";
+                totalSEK += c.TotalPrice();
             }
 
             string totalFormatted = CurrencyConverter.Format(totalSEK, StoreController.SelectedCurrency);

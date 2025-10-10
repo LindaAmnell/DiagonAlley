@@ -4,29 +4,26 @@ namespace DiagonAlley.Services
 {
     public static class CurrencyConverter
     {
-
         public static double ConvertFromSEK(double amount, Currency toCurrency)
         {
-            return amount / (int)toCurrency;
-        }
-        private static string GetSymbol(Currency currency)
-        {
-            return currency switch
-            {
-                Currency.SEK => "kr",
-                Currency.USD => "$",
-                Currency.EUR => "€",
-                _ => ""
-            };
-        }
 
-        public static void ShowAvailableCurrencies()
+            if (toCurrency == Currency.USD)
+                return amount * 0.09;
+            else if (toCurrency == Currency.EUR)
+                return amount * 0.085;
+            else
+                return amount;
+        }
+        public static string GetSymbol(Currency currency)
         {
-            Console.WriteLine("\nAvailable currencies:");
-            foreach (Currency currency in Enum.GetValues(typeof(Currency)))
-            {
-                Console.WriteLine($"- {currency} ({GetSymbol(currency)})");
-            }
+            if (currency == Currency.SEK)
+                return "kr";
+            else if (currency == Currency.USD)
+                return "$";
+            else if (currency == Currency.EUR)
+                return "€";
+            else
+                return "";
         }
 
         public static string Format(double amount, Currency currency)
@@ -36,6 +33,8 @@ namespace DiagonAlley.Services
 
             return $"{converted:F2} {symbol}";
         }
+
+
     }
 }
 

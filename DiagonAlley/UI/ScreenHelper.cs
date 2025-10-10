@@ -1,4 +1,5 @@
 ﻿using DiagonAlley.Models;
+using DiagonAlley.Models.Customer;
 using DiagonAlley.Services;
 
 namespace DiagonAlley.UI
@@ -24,19 +25,8 @@ namespace DiagonAlley.UI
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.WriteLine($"Logged in as: {wizard.Name} | Items in cart: {totalItems} | Total: {totalFormatted}");
                 Console.ResetColor();
-                Console.WriteLine("───────────────────────────────────────────────────────────────────");
+                Console.WriteLine("────────────────────────────────────────────────────────────────");
             }
-        }
-
-
-        public static void ClearBelowHeader(int startLine = 4)
-        {
-            for (int i = startLine; i < Console.WindowHeight; i++)
-            {
-                Console.SetCursorPosition(0, i);
-                Console.Write(new string(' ', Console.WindowWidth));
-            }
-            Console.SetCursorPosition(0, startLine);
         }
 
         public static void RefreshScreen()

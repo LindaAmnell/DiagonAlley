@@ -3,7 +3,7 @@
     public static class InputHelper
     {
 
-        public static string AskForChoice(string message = "Choose a option: ")
+        public static string AskForChoice(string message = "Choose an option: ")
         {
             Console.Write(message);
             return Console.ReadLine() ?? "";
@@ -14,37 +14,27 @@
             Console.WriteLine(message);
             Console.ReadKey();
         }
-
-        public static string AskForInput(string message)
+        public static string AskForNonEmptyInput(string message)
         {
-            Console.Write(message);
-            string input = Console.ReadLine();
-
-            return input;
-        }
-
-        public static string NonEmptyInput(string message)
-        {
-            string input;
-            do
+            while (true)
             {
                 Console.Write(message);
-                input = Console.ReadLine();
+                string input = Console.ReadLine();
 
-                if (string.IsNullOrWhiteSpace(input))
-                    Console.WriteLine("Input cannot be empty. Please try again.\n");
+                if (!string.IsNullOrWhiteSpace(input))
+                    return input;
 
-            } while (string.IsNullOrWhiteSpace(input));
-
-            return input.Trim();
+                Console.WriteLine("Input cannot be empty. Please try again.\n");
+            }
         }
+
         public static bool YesOrNo(string message)
         {
             string input;
             while (true)
             {
                 Console.Write($"{message} (yes/no): ");
-                input = Console.ReadLine().Trim().ToLower();
+                input = Console.ReadLine()?.Trim().ToLower();
 
                 if (input == "yes" || input == "y")
                     return true;

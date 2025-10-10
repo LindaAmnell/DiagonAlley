@@ -1,14 +1,16 @@
 ﻿using DiagonAlley.Models;
+using DiagonAlley.Models.Customer;
+using DiagonAlley.Models.Products;
 using DiagonAlley.Services;
 
 namespace DiagonAlley.UI
 {
-    public class StoreController
+    public static class StoreController
     {
         public static Currency SelectedCurrency { get; private set; } = Currency.SEK;
 
-        private readonly WizardService wizardService = new WizardService();
-        public void RunStore()
+        private static readonly WizardService wizardService = new WizardService();
+        public static void RunStore()
         {
             bool running = true;
 
@@ -37,12 +39,13 @@ namespace DiagonAlley.UI
                         break;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
+                        InputHelper.Pause();
                         break;
                 }
             }
         }
 
-        private void HandleCustomerMenu(Wizard w)
+        private static void HandleCustomerMenu(Wizard w)
         {
             bool loggedIn = true;
             while (loggedIn)
@@ -61,7 +64,7 @@ namespace DiagonAlley.UI
                         CheckoutMenu(w);
                         break;
                     case "4":
-                        SelectedCurrency = Menu.ChooseCurrency();
+                        SelectedCurrency = CurrencyMenu();
                         break;
                     case "5":
                         Console.WriteLine($"{w.Name} has exited Diagon Alley.");
@@ -70,12 +73,13 @@ namespace DiagonAlley.UI
                         break;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
+                        InputHelper.Pause();
                         break;
                 }
             }
         }
 
-        private void ProductsMenu(Wizard w)
+        private static void ProductsMenu(Wizard w)
         {
             bool isShopping = true;
 
@@ -92,14 +96,15 @@ namespace DiagonAlley.UI
                         (chosen, amount) = ProductPrinter.ShowAllProducts<Potion>("Potion");
                         break;
                     case "3":
-                        (chosen, amount) = ProductPrinter.ShowAllProducts<Broomstick>("Bromstick");
+                        (chosen, amount) = ProductPrinter.ShowAllProducts<Broomstick>("Broomstick");
                         break;
                     case "4":
                         isShopping = false;
-                        Console.WriteLine("Leving shop..");
+                        Console.WriteLine("Leaving shop..");
                         break;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
+                        InputHelper.Pause();
                         break;
                 }
                 if (chosen != null && amount > 0)
@@ -111,7 +116,7 @@ namespace DiagonAlley.UI
             }
         }
 
-        private void CheckoutMenu(Wizard w)
+        private static void CheckoutMenu(Wizard w)
         {
             bool stayInMenu = true;
             while (stayInMenu)
@@ -125,7 +130,7 @@ namespace DiagonAlley.UI
                         stayInMenu = false;
                         break;
                     case "2":
-                        CartService.ClearWizardCart(w, SelectedCurrency);
+                        CartService.ClearWizardCart(w);
                         stayInMenu = false;
                         break;
                     case "3":
@@ -139,6 +144,36 @@ namespace DiagonAlley.UI
                         Console.WriteLine("Invalid choice.");
                         break;
                 }
+            }
+        }
+
+        private static Currency CurrencyMenu()
+        {
+            while (true)
+            {
+                Currency chosenCurrency;
+                string input = Menu.ChooseCurrency();
+
+                switch (input)
+                {
+                    case "1":
+                        chosenCurrency = Currency.SEK;
+                        break;
+                    case "2":
+                        chosenCurrency = Currency.USD;
+                        break;
+                    case "3":
+                        chosenCurrency = Currency.EUR;
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid choice! Please enter 1, 2, or 3.\n");
+                        continue;
+                }
+                Console.WriteLine($"\nYou selected: {chosenCurrency}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+
+                return chosenCurrency;
             }
         }
     }

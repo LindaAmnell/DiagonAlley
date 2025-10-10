@@ -6,9 +6,9 @@ namespace DiagonAlley
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             ScreenHelper.PrintHeader();
-            var store = new StoreController();
-            store.RunStore();
+            StoreController.RunStore();
         }
     }
 }

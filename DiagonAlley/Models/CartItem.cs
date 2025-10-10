@@ -1,4 +1,5 @@
-﻿using DiagonAlley.Services;
+﻿using DiagonAlley.Models.Products;
+using DiagonAlley.Services;
 using DiagonAlley.UI;
 
 namespace DiagonAlley.Models
@@ -19,13 +20,19 @@ namespace DiagonAlley.Models
         {
             return Product.Price * Amount;
         }
+        public void AddAmount(int amount)
+        {
+            if (amount > 0) Amount += amount;
+        }
 
         public override string ToString()
         {
             double totalSek = TotalPrice();
-            double converted = CurrencyConverter.ConvertFromSEK(totalSek, StoreController.SelectedCurrency);
-            return $"{Amount} x {Product.Name} = {converted:F2} {StoreController.SelectedCurrency}";
+            string unitFormatted = CurrencyConverter.Format(Product.Price, StoreController.SelectedCurrency);
+            string totalFormatted = CurrencyConverter.Format(totalSek, StoreController.SelectedCurrency);
+            return $"{Product.Name} {unitFormatted} x {Amount} = {totalFormatted}";
         }
+
 
 
     }

@@ -1,4 +1,4 @@
-﻿using DiagonAlley.Models;
+﻿using DiagonAlley.Models.Customer;
 
 namespace DiagonAlley.Services
 {

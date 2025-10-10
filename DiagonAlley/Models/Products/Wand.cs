@@ -1,8 +1,8 @@
-﻿namespace DiagonAlley.Models
+﻿namespace DiagonAlley.Models.Products
 {
     public class Wand : Product
     {
-        public String Core { get; private set; }
+        public string Core { get; private set; }
         public double Length { get; private set; }
 
         public Wand(string name, double price, int amount, string core, double length) : base(name, price, amount)
