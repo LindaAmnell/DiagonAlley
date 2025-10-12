@@ -22,6 +22,22 @@ namespace DiagonAlley.Services
         };
 
         private static List<Wizard> wizards = CustomerFileService.LoadWizards();
+        static DataService()
+        {
+
+            if (wizards == null || wizards.Count == 0)
+            {
+                wizards = new List<Wizard>
+                {
+                    new GoldWizard("Harry Potter", "123", "wizard" ),
+                    new SilverWizard("Hermione Granger", "321", "Witch"),
+                    new BronzeWizard("Ron Weasley", "213", "wizard")
+                };
+
+
+                CustomerFileService.SaveWizards(wizards);
+            }
+        }
 
         public static List<T> GetProductByType<T>() where T : Product
         {

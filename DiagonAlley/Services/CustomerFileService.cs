@@ -13,7 +13,7 @@ namespace DiagonAlley.Services
             {
                 foreach (Wizard w in wizards)
                 {
-                    writer.WriteLine($"{w.Name},{w.GetPassword()},{w.Role},{w.Level} ");
+                    writer.WriteLine($"{w.Name},{w.GetPassword()},{w.Role},{w.Level}");
                 }
 
             }
@@ -38,7 +38,7 @@ namespace DiagonAlley.Services
                     string name = parts[0].Trim();
                     string password = parts[1].Trim();
                     string role = parts[2].Trim();
-                    string levelText = parts.Length >= 4 ? parts[3].Trim() : "None";
+                    string levelText = parts.Length >= 4 ? parts[3].Trim() : "Regular";
 
                     WizardLevel level = Enum.TryParse(levelText, true, out WizardLevel parsedLevel)
                         ? parsedLevel

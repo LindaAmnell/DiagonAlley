@@ -1,1 +1,3 @@
-﻿
+﻿Harry Potter,123,Wizard,Gold 
+Hermione Granger,321,Witch,Silver 
+Ron Weasley,213,Wizard,Bronze 

@@ -21,7 +21,7 @@ namespace DiagonAlley.UI
             Console.WriteLine("[1] None (0% discount)");
             Console.WriteLine("[2] Bronze (5% discount)");
             Console.WriteLine("[3] Silver (10% discount)");
-            Console.WriteLine("[4] Gold (15% discount)");
+            Console.WriteLine("[4] Gold (15% discount)\n");
             Console.Write("Enter choice (1–4): ");
 
             return InputHelper.AskForChoice();
